@@ -9,6 +9,7 @@
 }
 .card img{
     height: 239px;
+    object-fit: cover;
 }
 footer h5,.nav-link{
     color:#ffff !important;
