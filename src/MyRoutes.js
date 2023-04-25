@@ -8,6 +8,8 @@ import Cart from './pages/Cart'
 import ForgetPassword from './pages/ForgetPassword'
 import Products from './pages/Products'
 import EmailVerify from './auth/EmailVerify'
+import AdminRoute from './auth/AdminRoute'
+import Dashboard from './admin/Dashboard'
 
 const MyRoutes = () => {
   return (
@@ -21,6 +23,12 @@ const MyRoutes = () => {
           <Route path='forgotpassword' element={<ForgetPassword/>}/>
           <Route path='products' element={<Products/>}/>
           <Route path='email/confirmation/:token' element={<EmailVerify/>}/>
+        </Route>
+
+
+        {/* admin */}
+        <Route path='/admin/' element={<AdminRoute/>}>
+          <Route path='dashboard' element={<Dashboard/>}/>
         </Route>
       </Routes>
     </Router>

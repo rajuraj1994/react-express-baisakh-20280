@@ -1,9 +1,10 @@
 import React,{useState} from 'react'
 import { Link,useNavigate,Navigate } from 'react-router-dom'
-import { signin } from '../auth'
+import { signin,authenticate,isAuthenticated } from '../auth'
 
 const Login = () => {
     const navigate=useNavigate()
+    const{user}=isAuthenticated()
 
     const[values,setValues]=useState({
         email:'',
@@ -28,7 +29,9 @@ const Login = () => {
                 setValues({...values,error:data.error})
             }
             else{
-                return <Navigate to='/'/>
+              authenticate(data,()=>{
+                setValues({...values,redirectToPage:true})
+              })
             }
         })
     }
@@ -38,6 +41,19 @@ const Login = () => {
             {error}
         </div>
     )
+
+    // to redirect user 
+    const redirectUser=()=>{
+        const redirect='/profile'
+        if(redirectToPage){
+            if(user && user.role===1){
+                return navigate('/admin/dashboard')
+            }
+            else{
+                return <Navigate to={redirect}/>
+            }
+        }
+    }
 
     return (
         <>
@@ -49,6 +65,7 @@ const Login = () => {
                             Login Form
                         </h2>
                         {showError()}
+                        {redirectUser()}
                         <div className="mb-3">
                             <label htmlFor="email">Email</label>
                             <input type="email" id="email" className="form-control" 
