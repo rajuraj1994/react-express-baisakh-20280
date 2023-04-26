@@ -28,7 +28,7 @@ const Dashboard = () => {
                     <span>Delivered: 0</span>
                   </div>
                   <div className="col-auto text-center">
-                    <i className="fab fa-first-order-alt fs-1 text-success"></i>
+                    <i className="fab fa-first-order-alt fa-spin fs-1 text-success"></i>
                   </div>
                 </div>
               </div>
@@ -76,7 +76,7 @@ const Dashboard = () => {
                     <span>Out of Stock: 0</span>
                   </div>
                   <div className="col-auto text-center">
-                    <i className="fas fa-globe fs-1 text-light"></i>
+                    <i className="fas fa-globe fs-1 text-light fa-spin"></i>
                   </div>
                 </div>
               </div>
