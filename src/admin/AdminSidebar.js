@@ -24,7 +24,7 @@ const AdminSidebar = () => {
                 <li><Link to="/admin/dashboard" className="text-decoration-none text-white">Dashboard</Link></li>
                 <li><Link to="#" className="text-decoration-none text-white">Users</Link></li>
                 <li><Link to="#" className="text-decoration-none text-white">Products</Link></li>
-                <li><Link to="#" className="text-decoration-none text-white">Categories</Link></li>
+                <li><Link to="/admin/category" className="text-decoration-none text-white">Categories</Link></li>
                 <li><Link to="#" className="text-decoration-none text-white">Orders</Link></li>
                 <li><Link to="/" className="text-decoration-none text-white">Go to Homepage</Link></li>
                 <li><Link to="/admin/addcategory" className="text-decoration-none text-white">Add Category</Link></li>

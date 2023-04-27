@@ -11,6 +11,7 @@ import EmailVerify from './auth/EmailVerify'
 import AdminRoute from './auth/AdminRoute'
 import Dashboard from './admin/Dashboard'
 import AddCategory from './admin/AddCategory'
+import Category from './admin/Category'
 
 const MyRoutes = () => {
   return (
@@ -31,6 +32,7 @@ const MyRoutes = () => {
         <Route path='/admin/' element={<AdminRoute/>}>
           <Route path='dashboard' element={<Dashboard/>}/>
           <Route path='addcategory' element={<AddCategory/>}/>
+          <Route path='category' element={<Category/>}/>
         </Route>
       </Routes>
     </Router>
