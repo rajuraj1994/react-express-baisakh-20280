@@ -8,18 +8,16 @@ const Category = () => {
     useEffect(()=>{
         axios.get(`${API}/categorylist`)
         .then(res=>{
-          console.log(res.json)
-
+         setCategory(res.data)
         })
-        .then(data=>setCategory(data))
         .catch(err=>console.log(err))
-    })
+    },[])
     return (
     <>
             <div class='container'>
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-5 shadow">
-                        <table class="table">
+                        <table class="table table-striped">
                             <thead>
                                     <tr>
                                     <th scope="col">Category Name</th>

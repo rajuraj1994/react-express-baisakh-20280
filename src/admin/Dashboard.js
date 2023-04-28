@@ -1,13 +1,11 @@
 import React from 'react'
 import { isAuthenticated } from '../auth'
-import AdminSidebar from './AdminSidebar'
 import { Link } from 'react-router-dom'
 
 const Dashboard = () => {
     const{user}=isAuthenticated()
   return (
     <>
-   <AdminSidebar/>
    <div className="container-fluid">
     <h2 className="text-center my-3 text-muted">
       Admin Dashboard

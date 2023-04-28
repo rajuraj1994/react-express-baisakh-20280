@@ -1,5 +1,4 @@
 import React,{useState} from 'react'
-import AdminSidebar from './AdminSidebar'
 import { isAuthenticated } from '../auth'
 import { addcategory } from './apiIndex'
 
@@ -50,7 +49,7 @@ const AddCategory = () => {
 
     return (
         <>
-            <AdminSidebar />
+           
             <div className='container'>
                 <div className='row d-flex justify-content-center'>
                     <div className='col-md-6'>
