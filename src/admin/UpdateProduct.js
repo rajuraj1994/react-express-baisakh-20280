@@ -4,24 +4,72 @@ import { API } from '../config'
 import { isAuthenticated } from '../auth'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useParams } from 'react-router-dom';
 
-const AddProduct = () => {
+const UpdateProduct = () => {
+    const params=useParams()
+    const id=params.productId
     const [categories, setCategory] = useState([])
-    useEffect(() => {
-        axios.get(`${API}/categorylist`)
-            .then(res => {
-                setCategory(res.data)
-            })
-            .catch(err => console.log(err))
-    }, [])
-
+    const[initialValues,setInitialValues]=useState({})
     const { token } = isAuthenticated()
 
-    const [success, setSuccess] = useState(false)
-    const [error, setError] = useState('')
+    const[product_name,setProductName]=useState('')
+    const[product_price,setProductPrice]=useState('')
+    const[countInStock,setCountInStock]=useState('')
+    const[product_description,setProductDescription]=useState('')
+    const[product_image,setProductImage]=useState(null)
+    const[category,setCategories]=useState('')
+    const[success, setSuccess] = useState(false)
+    const[error, setError] = useState('')
+
+    useEffect(()=>{
+        axios.get(`${API}/categorylist`)
+        .then(res => {
+            setCategory(res.data)
+        })
+        .catch(err => console.log(err))
+    },[])
+
+    useEffect(() => {
+        axios.get(`${API}/productdetails/${id}`)
+        .then(res=>{
+            setInitialValues(res.data)
+            setProductName(res.data.product_name)
+            setProductPrice(res.data.product_price)
+            setCountInStock(res.data.countInStock)
+            setProductDescription(res.data.product_description)
+            setCategory(res.data.category)
+        })
+        .catch(err => console.log(err))
+    }, [])
 
     const handleSubmit = async event => {
         event.preventDefault()
+        const formData = new FormData();
+            formData.append('product_name', product_name)
+            formData.append('product_price', product_price)
+            formData.append('countInStock', countInStock)
+            formData.append('product_description', product_description)
+            formData.append('product_image', product_image)
+            formData.append('category', category)
+            try{
+                const response=await axios.put(
+                    `${API}/updateproduct/${id}`,
+                    formData,
+                    {
+                        headers: {
+                            'Content-Type': 'multipart/form-data',
+                            Authorization: `Bearer ${token}`
+                        },
+                    }
+                )
+                setSuccess(true)
+                setError('')
+            }
+            catch(err){
+                setError(err.response.data.error)
+                setSuccess('')
+            }
     }
 
     //to show error msg 
@@ -34,7 +82,7 @@ const AddProduct = () => {
     // to show success msg
     const showSuccess=()=>(
         success && <div className='alert alert-success'>
-          new product added
+          Product updated
         </div>
     )
 
@@ -50,37 +98,38 @@ const AddProduct = () => {
                             <div className='mb-2'>
                                 <label htmlFor='pname'>Product Name</label>
                                 <input type='text' id='pname' className='form-control'
-                                    onChange={} value={product_name}
+                                    onChange={(e)=>setProductName(e.target.value)} value={product_name}
                                 />
                             </div>
                             <div className='mb-2'>
                                 <label htmlFor='price'>Price</label>
                                 <input type='number' id='price' className='form-control'
-                                    onChange={} value={product_price}
+                                    onChange={(e)=>setProductPrice(e.target.value)} value={product_price}
                                 />
                             </div>
                             <div className='mb-2'>
                                 <label htmlFor='qty'>Stock Quantity</label>
                                 <input type='number' id='qty' className='form-control'
-                                    onChange={} value={countInStock}
+                                    onChange={(e)=>setCountInStock(e.target.value)} value={countInStock}
                                 />
                             </div>
                             <div className='mb-2'>
                                 <label htmlFor='desc'>product Description</label>
                                 <textarea className='form-control' id='desc'
-                                    onChange={} value={product_description}
+                                    onChange={(e)=>setProductDescription(e.target.value)} value={product_description}
                                 ></textarea>
                             </div>
                             <div className='mb-2'>
                                 <label htmlFor='image'>Image</label>
                                 <input type='file' id='image' className='form-control' accept='image/*'
-                                    onChange={}
+                                    onChange={(e)=>setProductImage(e.target.files[0])}
                                 />
                             </div>
                             <div className='mb-2'>
                                 <label htmlFor='category'>Category</label>
-                                <select className='form-control' onChange={}>
-                                    {categories.map((c, i) => (
+                                <select className='form-control' onChange={(e)=>setCategories(e.target.value)}>
+                                    <option value={category._id}>{category.category_name}</option>
+                                    {categories && categories.map((c, i) => (
                                         <option key={i} value={c._id}>{c.category_name}</option>
                                     ))}
 
@@ -102,4 +151,4 @@ const AddProduct = () => {
     )
 }
 
-export default AddProduct
+export default UpdateProduct

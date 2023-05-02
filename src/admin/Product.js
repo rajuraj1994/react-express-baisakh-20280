@@ -5,6 +5,7 @@ import { API, IMG_URL } from '../config';
 import { isAuthenticated } from '../auth';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Link } from 'react-router-dom';
 
 const Product = () => {
     const{token}=isAuthenticated()
@@ -64,7 +65,7 @@ const Product = () => {
                                     <td><img src={`${IMG_URL}/${p.product_image}`} width='100' alt={p.product_name}/></td>
                                     <td>{p.category.category_name}</td>
                                     <td>  
-                                        <button className='btn btn-primary'><FaEdit/></button> <br/><br/>  
+                                        <Link className='btn btn-primary' to={`/admin/updateproduct/${p._id}`}><FaEdit/></Link> <br/><br/>  
                                         <button className='btn btn-danger'
                                         onClick={()=>deleteProduct(p._id)}
                                         ><FaTrash/></button>

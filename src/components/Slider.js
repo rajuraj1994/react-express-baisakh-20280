@@ -22,7 +22,7 @@ const Slider = () => {
             </div>
           </div>
           <div className="carousel-item">
-            <img src="https://leadgenera.com/wp-content/uploads/The-Guide-to-Ecommerce-Marketing-Lead-Genera.jpg"
+            <img src="https://images.pexels.com/photos/4195335/pexels-photo-4195335.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
               className="d-block w-100" alt="..." />
             <div className="carousel-caption d-none d-md-block">
               <h5>Second slide label</h5>
@@ -30,7 +30,7 @@ const Slider = () => {
             </div>
           </div>
           <div className="carousel-item">
-            <img src="https://www.fides.it/wp-content/uploads/2020/07/retake-articolo-1.jpg" className="d-block w-100"
+            <img src="https://images.pexels.com/photos/574284/pexels-photo-574284.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" className="d-block w-100"
               alt="..." />
             <div className="carousel-caption d-none d-md-block">
               <h5>Third slide label</h5>

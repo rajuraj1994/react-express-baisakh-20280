@@ -6,6 +6,7 @@
 }
 .carousel-item img{
     height: 520px;
+    object-fit: cover;
 }
 .card img{
     height: 239px;

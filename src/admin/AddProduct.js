@@ -114,7 +114,7 @@ const AddProduct = () => {
                                 />
                             </div>
                             <div className='mb-2'>
-                                <label htmlFor='desc'>product Description</label>
+                                <label htmlFor='desc'>Product Description</label>
                                 <textarea className='form-control' id='desc'
                                     onChange={handleChange('product_description')} value={product_description}
                                 ></textarea>

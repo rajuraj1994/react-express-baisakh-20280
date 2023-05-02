@@ -14,6 +14,7 @@ import AddCategory from './admin/AddCategory'
 import Category from './admin/Category'
 import AddProduct from './admin/AddProduct'
 import Product from './admin/Product'
+import UpdateProduct from './admin/UpdateProduct'
 
 const MyRoutes = () => {
   return (
@@ -37,6 +38,7 @@ const MyRoutes = () => {
           <Route path='category' element={<Category/>}/>
           <Route path='addproduct' element={<AddProduct/>}/>
           <Route path='product' element={<Product/>}/>
+          <Route path='updateproduct/:productId' element={<UpdateProduct/>}/>
         </Route>
       </Routes>
     </Router>
