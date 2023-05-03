@@ -18,19 +18,18 @@ const UpdateProduct = () => {
     const[countInStock,setCountInStock]=useState('')
     const[product_description,setProductDescription]=useState('')
     const[product_image,setProductImage]=useState(null)
-    const[category,setCategories]=useState('')
+    const[categoryId,setCategoryId]=useState('')
     const[success, setSuccess] = useState(false)
     const[error, setError] = useState('')
 
-    useEffect(()=>{
+    useEffect(() => {
+
         axios.get(`${API}/categorylist`)
         .then(res => {
             setCategory(res.data)
         })
         .catch(err => console.log(err))
-    },[])
 
-    useEffect(() => {
         axios.get(`${API}/productdetails/${id}`)
         .then(res=>{
             setInitialValues(res.data)
@@ -38,7 +37,7 @@ const UpdateProduct = () => {
             setProductPrice(res.data.product_price)
             setCountInStock(res.data.countInStock)
             setProductDescription(res.data.product_description)
-            setCategory(res.data.category)
+            setCategoryId(res.data.category._id)
         })
         .catch(err => console.log(err))
     }, [])
@@ -51,7 +50,7 @@ const UpdateProduct = () => {
             formData.append('countInStock', countInStock)
             formData.append('product_description', product_description)
             formData.append('product_image', product_image)
-            formData.append('category', category)
+            formData.append('category', categoryId)
             try{
                 const response=await axios.put(
                     `${API}/updateproduct/${id}`,
@@ -127,8 +126,8 @@ const UpdateProduct = () => {
                             </div>
                             <div className='mb-2'>
                                 <label htmlFor='category'>Category</label>
-                                <select className='form-control' onChange={(e)=>setCategories(e.target.value)}>
-                                    <option value={category._id}>{category.category_name}</option>
+                                <select className='form-control' onChange={(e)=>setCategoryId(e.target.value)}>
+                                    <option value={categoryId}>{initialValues.category && initialValues.category.category_name }</option>
                                     {categories && categories.map((c, i) => (
                                         <option key={i} value={c._id}>{c.category_name}</option>
                                     ))}
@@ -139,7 +138,7 @@ const UpdateProduct = () => {
                                 <button className='btn btn-primary'
                                     onClick={handleSubmit}
                                 >
-                                    Add
+                                   Update Product
                                 </button>
                             </div>
 

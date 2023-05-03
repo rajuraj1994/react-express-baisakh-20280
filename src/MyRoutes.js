@@ -15,6 +15,7 @@ import Category from './admin/Category'
 import AddProduct from './admin/AddProduct'
 import Product from './admin/Product'
 import UpdateProduct from './admin/UpdateProduct'
+import ProductDetails from './pages/ProductDetails'
 
 const MyRoutes = () => {
   return (
@@ -27,6 +28,7 @@ const MyRoutes = () => {
           <Route path='cart' element={<Cart/>}/>
           <Route path='forgotpassword' element={<ForgetPassword/>}/>
           <Route path='products' element={<Products/>}/>
+          <Route path='productdetails/:productId' element={<ProductDetails/>}/>
           <Route path='email/confirmation/:token' element={<EmailVerify/>}/>
         </Route>
 
