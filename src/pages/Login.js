@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { Link,useNavigate,Navigate } from 'react-router-dom'
+import { Link,useNavigate} from 'react-router-dom'
 import { signin,authenticate,isAuthenticated } from '../auth'
 
 const Login = () => {
@@ -45,19 +45,23 @@ const Login = () => {
     // to redirect user 
     const redirectUser=()=>{
         const redirect='/profile'
+        const searchParams=new URLSearchParams(window.location.search)
+        const redirectParam=searchParams.get('redirect')
         if(redirectToPage){
             if(user && user.role===1){
                 return navigate('/admin/dashboard')
             }
+            else if(redirectParam==='shipping'){
+                navigate('/shipping')
+            }
             else{
-                return <Navigate to={redirect}/>
+                navigate(redirect)
             }
         }
     }
 
     return (
         <>
-
             <div className="d-flex justify-content-center">
                 <div className="col-lg-5 my-4">
                     <form className="p-3 shadow-lg">

@@ -2,8 +2,10 @@ import React, { useState, useEffect,Fragment } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { IMG_URL } from '../config';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
+    const navigate=useNavigate()
     const [products, setProducts] = useState([])
 
     useEffect(() => {
@@ -34,7 +36,18 @@ const Cart = () => {
         setProducts(updateProducts)
         localStorage.setItem('cartItems',JSON.stringify(updateProducts))
     } 
-
+    //remove from cart 
+    const removeCartHandler=(id,name)=>{
+        const cartItems=JSON.parse(localStorage.getItem('cartItems'))
+        const filterCart=cartItems.filter(item=>item.id!==id)
+        localStorage.setItem('cartItems',JSON.stringify(filterCart))
+        setProducts(filterCart)
+        toast.success(`${name} is removed from the cart`)
+    }
+    // shipping handler
+    const shippingHandler=()=>{
+        navigate('/signin?redirect=shipping')
+    }
     return (
         <>
             <ToastContainer theme='colored' position='top-center' />
@@ -71,7 +84,7 @@ const Cart = () => {
 
                                         </div>
                                         <div className="col-1">
-                                            <button className="btn btn-danger">
+                                            <button className="btn btn-danger" onClick={()=>removeCartHandler(item.id,item.name)}>
                                                 <i className="fa fa-trash"></i>
                                             </button>
                                         </div>
@@ -89,7 +102,7 @@ const Cart = () => {
                                         <br />
                                         <span><b>Total:</b> Rs.{products.reduce((ac,item)=>(ac+item.quantity*item.price),0)}</span>
                                         <hr />
-                                        <button className="btn btn-warning">CheckOut</button>
+                                        <button className="btn btn-warning" onClick={shippingHandler}>CheckOut</button>
                                     </div>
                                 </div>
                             </>

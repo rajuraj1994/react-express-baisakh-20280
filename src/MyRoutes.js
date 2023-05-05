@@ -16,6 +16,7 @@ import AddProduct from './admin/AddProduct'
 import Product from './admin/Product'
 import UpdateProduct from './admin/UpdateProduct'
 import ProductDetails from './pages/ProductDetails'
+import Shipping from './pages/Shipping'
 
 const MyRoutes = () => {
   return (
@@ -30,6 +31,7 @@ const MyRoutes = () => {
           <Route path='products' element={<Products/>}/>
           <Route path='productdetails/:productId' element={<ProductDetails/>}/>
           <Route path='email/confirmation/:token' element={<EmailVerify/>}/>
+          <Route path='shipping' element={<Shipping/>}/>
         </Route>
 
 
