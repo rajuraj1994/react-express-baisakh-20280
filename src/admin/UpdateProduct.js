@@ -12,7 +12,7 @@ const UpdateProduct = () => {
     const [categories, setCategory] = useState([])
     const[initialValues,setInitialValues]=useState({})
     const { token } = isAuthenticated()
-
+    
     const[product_name,setProductName]=useState('')
     const[product_price,setProductPrice]=useState('')
     const[countInStock,setCountInStock]=useState('')

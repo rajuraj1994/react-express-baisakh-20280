@@ -17,6 +17,7 @@ import Product from './admin/Product'
 import UpdateProduct from './admin/UpdateProduct'
 import ProductDetails from './pages/ProductDetails'
 import Shipping from './pages/Shipping'
+import ConfirmOrder from './pages/ConfirmOrder'
 
 const MyRoutes = () => {
   return (
@@ -32,6 +33,7 @@ const MyRoutes = () => {
           <Route path='productdetails/:productId' element={<ProductDetails/>}/>
           <Route path='email/confirmation/:token' element={<EmailVerify/>}/>
           <Route path='shipping' element={<Shipping/>}/>
+          <Route path='confirm' element={<ConfirmOrder/>}/>
         </Route>
 
 
