@@ -18,6 +18,7 @@ import UpdateProduct from './admin/UpdateProduct'
 import ProductDetails from './pages/ProductDetails'
 import Shipping from './pages/Shipping'
 import ConfirmOrder from './pages/ConfirmOrder'
+import PaymentElement from './pages/PaymentElement'
 
 const MyRoutes = () => {
   return (
@@ -34,6 +35,7 @@ const MyRoutes = () => {
           <Route path='email/confirmation/:token' element={<EmailVerify/>}/>
           <Route path='shipping' element={<Shipping/>}/>
           <Route path='confirm' element={<ConfirmOrder/>}/>
+          <Route path='payment' element={<PaymentElement/>}/>
         </Route>
 
 
