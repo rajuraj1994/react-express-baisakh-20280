@@ -1,9 +1,21 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { isAuthenticated, signout } from '../auth'
 
 const Header = () => {
     const navigate = useNavigate()
+    const [products, setProducts] = useState([])
+
+    useEffect(() => {
+        const cartData = localStorage.getItem('cartItems')
+        const cartItems=JSON.parse(cartData)
+        if(cartItems && cartItems.length >0){
+            setProducts(cartItems)
+        }
+        else{
+            setProducts([])
+        }
+    }, [])
     return (
         <>
             <div className="container-fluid">
@@ -73,7 +85,7 @@ const Header = () => {
                                         <span
                                             className="position-absolute top-0 start-100 bg-warning badge rounded-pill translate-middle text-dark"
                                             style={{ fontSize: '12px' }}>
-                                            <span>5</span>
+                                            <span>{products && products.length}</span>
                                         </span>
                                     </i>
                                 </Link>

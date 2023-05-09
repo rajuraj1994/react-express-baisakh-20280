@@ -10,7 +10,13 @@ const Cart = () => {
 
     useEffect(() => {
         const cartData = localStorage.getItem('cartItems')
-        setProducts(JSON.parse(cartData))
+        const cartItems=JSON.parse(cartData)
+        if(cartItems && cartItems.length >0){
+            setProducts(cartItems)
+        }
+        else{
+            setProducts([])
+        }
     }, [])
 
     //decrease quantity
