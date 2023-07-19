@@ -201,3 +201,46 @@ exports.signout=(req,res)=>{
     res.clearCookie('myCookie')
     res.json({message:'signout success'})
 }
+// Middleware for user role
+exports.requireUser = (req, res, next) => {
+  // Verify the JWT
+  expressjwt({
+    secret: process.env.JWT_SECRET,
+    algorithms: ["HS256"]
+  })(req, res, (err) => {
+    if (err) {
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
+
+    // Check the user's role
+    if (req.user.role === 0) {
+      // User role, grant access
+      next();
+    } else {
+      // Unauthorized role
+      return res.status(403).json({ error: 'Forbidden' });
+    }
+  });
+};
+
+// Middleware for admin role
+exports.requireAdmin = (req, res, next) => {
+  // Verify the JWT
+  expressjwt({
+    secret: process.env.JWT_SECRET,
+    algorithms: ["HS256"]
+  })(req, res, (err) => {
+    if (err) {
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
+
+    // Check the user's role
+    if (req.user.role === 1) {
+      // Admin role, grant access
+      next();
+    } else {
+      // Unauthorized role
+      return res.status(403).json({ error: 'Forbidden' });
+    }
+  });
+};
